@@ -56,12 +56,12 @@ export function RequestComponent() {
     requestDispatch({ type: 'RESET_REQUEST' });
   };
 
-  return `
-    <div>
-      <button onClick=${startRequest}>Почати запит</button>
-      <button onClick=${resetRequest}>Скинути запит</button>
-      <p>Стан запиту: ${requestState.requestStep}</p>
-    </div>`;
+  return;
+  <div>
+    <button onClick={startRequest}>Почати запит</button>
+    <button onClick={resetRequest}>Скинути запит</button>
+    <p>Стан запиту: {requestState.requestStep}</p>
+  </div>;
 }
 
 export default RequestComponent;
