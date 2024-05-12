@@ -1,4 +1,18 @@
-import React, {useReducer} from "react";
+import { useReducer } from 'react';
+
+//рядковий літерал
+type RequestStep = 'start' | 'pending' | 'finished' | 'idle';
+
+type State = {
+  isRequestInProgress: boolean;
+  requestStep: RequestStep;
+};
+
+type Action =
+  | { type: 'START_REQUEST' }
+  | { type: 'PENDING_REQUEST' }
+  | { type: 'FINISH_REQUEST' }
+  | { type: 'RESET_REQUEST' };
 
 const initialState: State = {
   isRequestInProgress: false,
@@ -21,7 +35,10 @@ function requestReducer(state: State, action: Action): State {
 }
 
 export function RequestComponent() {
-  const [requestState, requestDispatch] = useReducer(requestReducer, initialState);
+  const [requestState, requestDispatch] = useReducer(
+    requestReducer,
+    initialState
+  );
 
   const startRequest = () => {
     requestDispatch({ type: 'START_REQUEST' });
@@ -39,13 +56,12 @@ export function RequestComponent() {
     requestDispatch({ type: 'RESET_REQUEST' });
   };
 
-  return (
+  return `
     <div>
-      <button onClick={startRequest}>Почати запит</button>
-      <button onClick={resetRequest}>Скинути запит</button>
-      <p>Стан запиту: {requestState.requestStep}</p>
-    </div>
-  );
+      <button onClick=${startRequest}>Почати запит</button>
+      <button onClick=${resetRequest}>Скинути запит</button>
+      <p>Стан запиту: ${requestState.requestStep}</p>
+    </div>`;
 }
 
 export default RequestComponent;
